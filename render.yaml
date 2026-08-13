@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: expense-tracker-fintech
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
+    plan: free
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: GEMINI_API_KEY
+        value: AIzaSyDrNazTN-1oZMG-V23U15d_4MObuaQE2bA
+      - key: PYTHON_VERSION
+        value: 3.13.0

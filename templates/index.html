@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Tracker — Modern Personal Finance & Cash Flow Intelligence</title>
+  <meta name="description" content="A modern, fintech-style personal finance web application to record transactions, organize categories, manage budgets, and gain deep visual insights into your spending.">
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- ========================================================================= -->
+  <!-- 1. LANDING PAGE VIEW -->
+  <!-- ========================================================================= -->
+  <div id="landing-view">
+    <!-- Navbar -->
+    <header class="landing-nav">
+      <div class="brand-logo">
+        <div class="logo-icon">💳</div>
+        <span>Expense Tracker</span>
+      </div>
+      <div class="nav-actions">
+        <button class="btn btn-secondary btn-sm open-login-btn">Log In</button>
+        <button class="btn btn-primary btn-sm open-signup-btn">Get Started Free</button>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main>
+      <section class="hero-section">
+        <div class="hero-left">
+          <div class="hero-tag">
+            <span>✨</span> Next-Gen Personal Finance
+          </div>
+          <h1 class="hero-title">
+            Master Your Money With <span class="hero-teal-text">Total Clarity</span> & Control
+          </h1>
+          <p class="hero-subtitle">
+            Track daily expenses, categorize income, set smart monthly budgets, and uncover powerful visual insights into your cash flow with our modern fintech platform.
+          </p>
+          <div class="hero-cta-group">
+            <button class="btn btn-primary btn-lg open-signup-btn">
+              <span>Start Tracking Free</span>
+              <span>→</span>
+            </button>
+            <button class="btn btn-secondary btn-lg open-login-btn">
+              <span>Sign In to Account</span>
+            </button>
+          </div>
+          <div class="hero-stats-row">
+            <div class="hero-stat-item">
+              <h4>100%</h4>
+              <p>Private & Secure</p>
+            </div>
+            <div class="hero-stat-item">
+              <h4>$0</h4>
+              <p>Free Forever</p>
+            </div>
+            <div class="hero-stat-item">
+              <h4>Instant</h4>
+              <p>Visual Analytics</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-right hero-mockup-wrapper">
+          <!-- Floating decorative pill 1 -->
+          <div class="mockup-floating-pill pill-1">
+            <span style="font-size: 1.25rem;">📈</span>
+            <div>
+              <div style="font-size:0.75rem; color:var(--text-muted);">Savings Rate</div>
+              <strong style="color:var(--accent-teal); font-size:0.95rem;">+38.4% this month</strong>
+            </div>
+          </div>
+
+          <!-- Main Mockup Card -->
+          <div class="hero-mockup-card">
+            <div class="mockup-header">
+              <div>
+                <span style="font-size:0.8rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em;">Total Balance</span>
+                <div class="mockup-amount">$14,850.00</div>
+              </div>
+              <div class="mockup-balance-pill">Active Portfolio</div>
+            </div>
+
+            <div class="mockup-metric-grid">
+              <div class="mockup-metric-box income">
+                <span>Monthly Income</span>
+                <strong style="color:var(--income-green);">+$7,250.00</strong>
+              </div>
+              <div class="mockup-metric-box expense">
+                <span>Monthly Expenses</span>
+                <strong style="color:var(--expense-red);">-$2,895.00</strong>
+              </div>
+            </div>
+
+            <div class="mockup-tx-list">
+              <div class="mockup-tx-item">
+                <div class="mockup-tx-left">
+                  <div class="mockup-badge-icon" style="background:#dcfce7; color:#15803d;">💼</div>
+                  <div>
+                    <div style="font-weight:600; color:var(--text-white);">Engineering Salary</div>
+                    <div style="font-size:0.75rem; color:var(--text-muted);">Direct Deposit • Today</div>
+                  </div>
+                </div>
+                <strong style="color:var(--income-green);">+$5,800.00</strong>
+              </div>
+
+              <div class="mockup-tx-item">
+                <div class="mockup-tx-left">
+                  <div class="mockup-badge-icon" style="background:#fee2e2; color:#b91c1c;">🏠</div>
+                  <div>
+                    <div style="font-weight:600; color:var(--text-white);">Apartment Lease</div>
+                    <div style="font-size:0.75rem; color:var(--text-muted);">Rent • Yesterday</div>
+                  </div>
+                </div>
+                <strong style="color:var(--expense-red);">-$1,850.00</strong>
+              </div>
+
+              <div class="mockup-tx-item">
+                <div class="mockup-tx-left">
+                  <div class="mockup-badge-icon" style="background:#fef3c7; color:#b45309;">🍽️</div>
+                  <div>
+                    <div style="font-weight:600; color:var(--text-white);">Whole Foods Market</div>
+                    <div style="font-size:0.75rem; color:var(--text-muted);">Groceries • 2 days ago</div>
+                  </div>
+                </div>
+                <strong style="color:var(--expense-red);">-$86.50</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating decorative pill 2 -->
+          <div class="mockup-floating-pill pill-2">
+            <span style="font-size: 1.25rem;">🎯</span>
+            <div>
+              <div style="font-size:0.75rem; color:var(--text-muted);">Budget Target</div>
+              <strong style="color:var(--text-white); font-size:0.95rem;">Food & Dining 45% used</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Grid -->
+      <section class="features-section">
+        <div class="section-header">
+          <span class="section-tag">Powerful Features</span>
+          <h2 class="section-title">Everything You Need to Command Your Cash Flow</h2>
+          <p class="section-desc">Designed with high-precision financial analytics, instant search, budget limits, and complete data sovereignty.</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon-box">📊</div>
+            <h3>Interactive Analytics</h3>
+            <p>Donut charts for category spending, side-by-side monthly cash flows, and net worth growth curves over time.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">⚡</div>
+            <h3>Instant Transaction Tracking</h3>
+            <p>Log income and expenses in seconds with custom categories, dates, descriptions, and flexible filtering.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">🎯</div>
+            <h3>Smart Monthly Budgets</h3>
+            <p>Set spending caps per category and get real-time visual warnings before you exceed your financial limits.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">🔒</div>
+            <h3>Private & Isolated Data</h3>
+            <p>Every transaction is encrypted and tied strictly to your authenticated session. Your personal finances stay yours.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">📥</div>
+            <h3>One-Click CSV Export</h3>
+            <p>Download complete transaction statements formatted for tax preparation, spreadsheets, or personal archives.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">🌍</div>
+            <h3>Multi-Currency Support</h3>
+            <p>Seamlessly switch between USD ($), EUR (€), GBP (£), INR (₹), JPY (¥), CAD ($), and AUD ($).</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Steps Section -->
+      <section class="steps-section">
+        <div class="section-header">
+          <span class="section-tag">Simple & Intuitive</span>
+          <h2 class="section-title">Get Started in 3 Simple Steps</h2>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-number">01</div>
+            <h3>Create an Account</h3>
+            <p>Sign up with your email in less than 30 seconds. Optionally pre-load demo data to test drive the dashboard.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">02</div>
+            <h3>Record Transactions</h3>
+            <p>Add your salary, freelance earnings, food, rent, shopping, and bills with structured categories and timestamps.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">03</div>
+            <h3>Gain Visual Control</h3>
+            <p>Watch your savings rate climb, inspect category breakdowns, and optimize your monthly budget targets.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Call to action Banner -->
+      <section class="cta-banner-section">
+        <div class="cta-banner-card">
+          <h2>Ready to Take Control of Your Finances?</h2>
+          <p>Join today and start making smarter financial decisions with real-time analytics and budgeting tools.</p>
+          <button class="btn btn-primary btn-lg open-signup-btn">
+            Create Free Account Now →
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="landing-footer">
+      <p>© 2026 Expense Tracker. Built with precision for modern personal finance management.</p>
+    </footer>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 2. MAIN APPLICATION VIEW (DASHBOARD SHELL) -->
+  <!-- ========================================================================= -->
+  <div id="app-view" style="display:none;">
+    <!-- Sidebar -->
+    <aside class="app-sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-brand">
+          <div class="logo-icon" style="width:32px; height:32px; font-size:0.9rem;">💳</div>
+          <span>ExpenseTracker</span>
+        </div>
+      </div>
+
+      <div class="sidebar-action-box">
+        <button class="btn btn-primary open-add-tx-btn" style="width:100%;">
+          <span>+</span> New Transaction
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#dashboard" class="nav-link active" data-route="dashboard">
+          <span>📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="#transactions" class="nav-link" data-route="transactions">
+          <span>💳</span>
+          <span>Transactions</span>
+        </a>
+        <a href="#analytics" class="nav-link" data-route="analytics">
+          <span>📈</span>
+          <span>Analytics</span>
+        </a>
+        <a href="#budgets" class="nav-link" data-route="budgets">
+          <span>🎯</span>
+          <span>Budgets</span>
+        </a>
+        <a href="#settings" class="nav-link" data-route="settings">
+          <span>⚙️</span>
+          <span>Settings</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-profile-summary">
+          <div class="user-avatar">
+            <span class="user-avatar-initial">U</span>
+          </div>
+          <div class="user-info-text">
+            <div class="user-name-display">User Name</div>
+            <div class="user-email-display">user@example.com</div>
+          </div>
+        </div>
+        <button class="action-icon-btn btn-logout" title="Sign Out">
+          🚪
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Layout -->
+    <div class="app-main">
+      <!-- Top Navigation Bar -->
+      <header class="app-topbar">
+        <div class="topbar-left">
+          <button id="menu-toggle-btn" class="btn btn-secondary btn-icon-only" style="display:none;">☰</button>
+          <h2 id="page-main-title" class="page-title">Dashboard Overview</h2>
+        </div>
+
+        <div class="topbar-right">
+          <div class="date-badge">
+            <span>📅</span>
+            <span id="current-date-display">Today</span>
+          </div>
+          <div id="user-currency-badge" class="currency-badge">USD ($)</div>
+          <button class="btn btn-primary btn-sm open-add-tx-btn">
+            + Quick Add
+          </button>
+        </div>
+      </header>
+
+      <!-- Dynamic Views Container -->
+      <div class="content-container">
+
+        <!-- ================= VIEW: DASHBOARD ================= -->
+        <div id="view-dashboard" class="view-panel">
+          <!-- Metrics Grid -->
+          <div class="metrics-grid">
+            <div class="stat-card featured">
+              <div class="stat-top">
+                <span class="stat-label">Net Balance</span>
+                <div class="stat-icon-wrapper balance">💰</div>
+              </div>
+              <div id="dash-total-balance" class="stat-value">$0.00</div>
+              <div class="stat-subtext">
+                <span>Available financial reserve</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-top">
+                <span class="stat-label">Total Income</span>
+                <div class="stat-icon-wrapper income">📈</div>
+              </div>
+              <div id="dash-total-income" class="stat-value" style="color:var(--income-green);">$0.00</div>
+              <div class="stat-subtext">
+                <span>All recorded inflows</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-top">
+                <span class="stat-label">Total Expenses</span>
+                <div class="stat-icon-wrapper expense">📉</div>
+              </div>
+              <div id="dash-total-expense" class="stat-value" style="color:var(--expense-red);">$0.00</div>
+              <div class="stat-subtext">
+                <span>All recorded outflows</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-top">
+                <span class="stat-label">Savings Rate</span>
+                <div class="stat-icon-wrapper savings">🎯</div>
+              </div>
+              <div id="dash-savings-rate" class="stat-value" style="color:var(--accent-blue);">0%</div>
+              <div class="stat-subtext">
+                <span>Income retained as savings</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts Row -->
+          <div class="dashboard-widgets-grid">
+            <div class="widget-card">
+              <div class="widget-header">
+                <h3 class="widget-title">Monthly Cash Flow Trend</h3>
+                <span style="font-size:0.8rem; color:var(--text-muted);">Income vs. Expenses</span>
+              </div>
+              <div class="chart-container">
+                <canvas id="dash-cashflow-chart"></canvas>
+              </div>
+            </div>
+
+            <div class="widget-card">
+              <div class="widget-header">
+                <h3 class="widget-title">Spending Breakdown</h3>
+                <span style="font-size:0.8rem; color:var(--text-muted);">Current Month</span>
+              </div>
+              <div class="chart-container">
+                <canvas id="dash-category-chart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Transactions Widget -->
+          <div class="widget-card recent-tx-widget">
+            <div class="widget-header">
+              <h3 class="widget-title">Recent Transactions</h3>
+              <a href="#transactions" class="btn btn-secondary btn-sm">View All Records →</a>
+            </div>
+            <div id="dash-recent-tx-list">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= VIEW: TRANSACTIONS ================= -->
+        <div id="view-transactions" class="view-panel" style="display:none;">
+          <!-- Filter & Search Toolbar -->
+          <div class="filter-bar">
+            <div class="filter-controls-group">
+              <div class="search-box-wrap">
+                <span class="input-icon">🔍</span>
+                <input type="text" id="filter-search" placeholder="Search by description or category..." autocomplete="off">
+              </div>
+
+              <div class="pill-toggle-group">
+                <button class="pill-btn filter-type-pill active" data-type="all">All</button>
+                <button class="pill-btn filter-type-pill" data-type="income">Income</button>
+                <button class="pill-btn filter-type-pill" data-type="expense">Expenses</button>
+              </div>
+
+              <select id="filter-category" class="filter-select">
+                <option value="all">All Categories</option>
+              </select>
+            </div>
+
+            <div style="display:flex; gap:10px;">
+              <button id="export-csv-btn" class="btn btn-secondary btn-sm" title="Download transaction records in CSV format">
+                📥 Export CSV
+              </button>
+              <button class="btn btn-primary btn-sm open-add-tx-btn">
+                + Add Transaction
+              </button>
+            </div>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; font-size:0.85rem; color:var(--text-muted);">
+            <span id="tx-results-count">Loading transactions...</span>
+          </div>
+
+          <!-- Transactions Data Table -->
+          <div class="table-container">
+            <table class="tx-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Category</th>
+                  <th>Description</th>
+                  <th>Amount</th>
+                  <th style="width: 80px;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="transactions-table-body">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ================= VIEW: ANALYTICS ================= -->
+        <div id="view-analytics" class="view-panel" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-wrap:wrap; gap:16px;">
+            <div>
+              <h3 style="font-size:1.4rem; font-weight:700;">Financial Intelligence & Breakdown</h3>
+              <p style="color:var(--text-secondary); font-size:0.9rem;">Deep dive into spending behaviors and net worth growth trends.</p>
+            </div>
+            <div class="pill-toggle-group">
+              <button class="pill-btn analytics-tf-btn active" data-tf="all">All Time</button>
+              <button class="pill-btn analytics-tf-btn" data-tf="year">This Year</button>
+              <button class="pill-btn analytics-tf-btn" data-tf="month">This Month</button>
+            </div>
+          </div>
+
+          <!-- Automated Financial Health Insight & AI Strategic Audit -->
+          <div class="ai-audit-banner">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+              <div>
+                <span class="hero-tag" style="margin-bottom:8px; background:rgba(0, 212, 170, 0.15);">✨ Gemini 3.5 AI Financial Intelligence</span>
+                <h3 style="font-size:1.35rem; color:#ffffff;">AI Strategic Financial Audit & Wealth Forecast</h3>
+                <p style="color:var(--text-secondary); font-size:0.925rem; max-width:620px;">
+                  Let Gemini analyze your multi-month transactions, category spending velocity, and budget margins to generate a customized financial audit with savings optimization targets.
+                </p>
+              </div>
+              <button id="run-ai-audit-btn" class="btn btn-primary">
+                <span>✨ Run AI Financial Audit</span>
+              </button>
+            </div>
+            <div id="ai-audit-result-box" class="audit-report-container" style="display:none;">
+              <!-- Populated by Gemini -->
+            </div>
+          </div>
+
+          <div id="analytics-insights-container"></div>
+
+          <!-- Donut Charts Row -->
+          <div class="analytics-top-grid">
+            <div class="widget-card">
+              <div class="widget-header">
+                <h3 class="widget-title">Expenses by Category</h3>
+              </div>
+              <div class="chart-container" style="min-height:300px;">
+                <canvas id="analytics-expense-donut"></canvas>
+              </div>
+            </div>
+
+            <div class="widget-card">
+              <div class="widget-header">
+                <h3 class="widget-title">Income Sources</h3>
+              </div>
+              <div class="chart-container" style="min-height:300px;">
+                <canvas id="analytics-income-donut"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Net Worth & Cash Flow Over Time -->
+          <div class="widget-card analytics-full-width">
+            <div class="widget-header">
+              <h3 class="widget-title">Net Balance Growth Over Time</h3>
+              <span style="font-size:0.8rem; color:var(--text-muted);">Cumulative Reserve Curve</span>
+            </div>
+            <div class="chart-container" style="min-height:320px;">
+              <canvas id="analytics-balance-trend-chart"></canvas>
+            </div>
+          </div>
+
+          <div class="widget-card analytics-full-width">
+            <div class="widget-header">
+              <h3 class="widget-title">Monthly Income vs. Expense Comparison</h3>
+            </div>
+            <div class="chart-container" style="min-height:320px;">
+              <canvas id="analytics-cashflow-comparison-chart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= VIEW: BUDGETS ================= -->
+        <div id="view-budgets" class="view-panel" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:16px;">
+            <div>
+              <h3 style="font-size:1.4rem; font-weight:700;">Monthly Spending Limits</h3>
+              <p style="color:var(--text-secondary); font-size:0.9rem;">Set category thresholds and monitor your budget utilization in real-time.</p>
+            </div>
+            <button id="open-add-budget-btn" class="btn btn-primary btn-sm">
+              + Set Budget Target
+            </button>
+          </div>
+
+          <div id="budgets-grid-container" class="budgets-grid">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- ================= VIEW: SETTINGS ================= -->
+        <div id="view-settings" class="view-panel" style="display:none;">
+          <div class="settings-section-card">
+            <h3>Profile & Currency Preferences</h3>
+            <p class="subtitle">Update your personal account details and default currency symbol.</p>
+
+            <form id="profile-form">
+              <div class="form-group">
+                <label class="form-label">Your Full Name</label>
+                <input type="text" id="settings-name" class="form-control no-icon" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Preferred Currency</label>
+                <select id="settings-currency" class="form-control no-icon">
+                  <option value="USD">USD ($) — US Dollar</option>
+                  <option value="EUR">EUR (€) — Euro</option>
+                  <option value="GBP">GBP (£) — British Pound</option>
+                  <option value="INR">INR (₹) — Indian Rupee</option>
+                  <option value="JPY">JPY (¥) — Japanese Yen</option>
+                  <option value="CAD">CAD ($) — Canadian Dollar</option>
+                  <option value="AUD">AUD ($) — Australian Dollar</option>
+                </select>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Save Preferences</button>
+            </form>
+          </div>
+
+          <div class="settings-section-card">
+            <h3>Demo Data Generator</h3>
+            <p class="subtitle">Quickly populate your account with realistic financial transactions, categories, and monthly history to test charts and analytics.</p>
+            <button class="btn btn-secondary btn-seed-demo">
+              ⚡ Load Rich Financial Demo Data
+            </button>
+          </div>
+
+          <div class="settings-section-card">
+            <h3>Security & Session</h3>
+            <p class="subtitle">Manage active session authentication.</p>
+            <button class="btn btn-danger btn-logout">
+              Log Out of Account
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- FLOATING AI FINANCIAL ADVISOR BUTTON & DRAWER -->
+  <!-- ========================================================================= -->
+  <button id="ai-fab-btn" class="ai-fab-btn" title="Open FinAI Financial Assistant">
+    <div class="ai-fab-pulse"></div>
+    <span>✨ Ask FinAI</span>
+  </button>
+
+  <div id="ai-drawer-backdrop" class="ai-drawer-backdrop">
+    <div class="ai-chat-drawer">
+      <div class="ai-chat-header">
+        <div class="ai-header-left">
+          <div class="ai-avatar">🤖</div>
+          <div>
+            <div style="font-weight:700; color:var(--text-white); font-size:1rem;">FinAI Advisor</div>
+            <div style="font-size:0.75rem; color:var(--accent-teal);">Powered by Gemini 3.5 Flash</div>
+          </div>
+        </div>
+        <button id="ai-drawer-close" class="modal-close-btn" style="position:static;" title="Close">✕</button>
+      </div>
+
+      <div id="ai-chat-body" class="ai-chat-body">
+        <div class="chat-bubble ai">
+          Hello! 👋 I'm <strong>FinAI</strong>, your personal financial advisor. I have real-time access to your transactions, categories, and budgets. Ask me anything or try one of the suggestions below!
+          
+          <div class="ai-quick-prompts">
+            <button class="quick-prompt-chip" data-prompt="Analyze my spending habits this month">📊 Analyze my spending</button>
+            <button class="quick-prompt-chip" data-prompt="Where can I cut expenses to save more?">💡 Where can I cut costs?</button>
+            <button class="quick-prompt-chip" data-prompt="Am I on track with my monthly budgets?">🎯 Check my budgets</button>
+            <button class="quick-prompt-chip" data-prompt="Calculate how much I will save in 6 months at my current rate">📈 6-month savings outlook</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ai-chat-footer">
+        <form id="ai-chat-form" class="ai-input-wrap">
+          <input type="text" id="ai-chat-input" placeholder="Ask FinAI about your money..." autocomplete="off" required>
+          <button type="submit" class="btn btn-primary btn-sm" style="padding:10px 18px;">
+            Send
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: AUTHENTICATION (LOGIN / SIGNUP) -->
+  <!-- ========================================================================= -->
+  <div id="auth-modal" class="modal-backdrop">
+    <div class="auth-card">
+      <button id="auth-modal-close" class="modal-close-btn" title="Close">✕</button>
+
+      <div class="auth-header">
+        <div class="logo-icon" style="margin: 0 auto 16px;">💳</div>
+        <h2 id="auth-modal-title">Welcome Back</h2>
+        <p id="auth-modal-desc">Enter your credentials to access your financial dashboard</p>
+      </div>
+
+      <div class="auth-tabs">
+        <button id="tab-btn-login" class="auth-tab active" type="button">Log In</button>
+        <button id="tab-btn-signup" class="auth-tab" type="button">Sign Up</button>
+      </div>
+
+      <div id="auth-alert" class="auth-alert"></div>
+
+      <form id="auth-form">
+        <div class="form-group signup-only-field" style="display:none;">
+          <label class="form-label">Full Name</label>
+          <div class="input-wrapper">
+            <span class="input-icon">👤</span>
+            <input type="text" id="auth-name" class="form-control" placeholder="e.g. Alex Morgan">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <div class="input-wrapper">
+            <span class="input-icon">✉️</span>
+            <input type="email" id="auth-email" class="form-control" placeholder="alex@example.com" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <div class="input-wrapper">
+            <span class="input-icon">🔒</span>
+            <input type="password" id="auth-password" class="form-control" placeholder="••••••••" required minlength="6">
+          </div>
+        </div>
+
+        <div class="form-group signup-only-field" style="display:none;">
+          <label class="form-label">Default Currency</label>
+          <select id="auth-currency" class="form-control no-icon">
+            <option value="USD">USD ($) — US Dollar</option>
+            <option value="EUR">EUR (€) — Euro</option>
+            <option value="GBP">GBP (£) — British Pound</option>
+            <option value="INR">INR (₹) — Indian Rupee</option>
+            <option value="JPY">JPY (¥) — Japanese Yen</option>
+            <option value="CAD">CAD ($) — Canadian Dollar</option>
+            <option value="AUD">AUD ($) — Australian Dollar</option>
+          </select>
+        </div>
+
+        <div class="form-group signup-only-field" style="display:none;">
+          <label class="form-checkbox-row">
+            <input type="checkbox" id="auth-seed-demo" checked>
+            <span>Preload realistic demo transactions & history</span>
+          </label>
+        </div>
+
+        <button type="submit" id="auth-submit-btn" class="btn btn-primary" style="width:100%; margin-top:10px;">
+          <span id="auth-submit-text">Log In to Dashboard</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: ADD / EDIT TRANSACTION WITH AI SMART PARSE -->
+  <!-- ========================================================================= -->
+  <div id="tx-modal" class="modal-backdrop">
+    <div class="auth-card" style="max-width:520px;">
+      <button id="tx-modal-close" class="modal-close-btn" title="Close">✕</button>
+
+      <div class="auth-header" style="text-align:left; margin-bottom:16px;">
+        <h2 id="tx-modal-title" style="font-size:1.45rem;">Record Transaction</h2>
+        <p>Enter details manually or use Gemini AI to parse natural text</p>
+      </div>
+
+      <!-- Mode Switcher: Manual vs AI Smart Add -->
+      <div class="auth-tabs" style="margin-bottom:18px;">
+        <button id="modal-mode-manual-btn" class="auth-tab active" type="button">Manual Entry</button>
+        <button id="modal-mode-ai-btn" class="auth-tab" type="button">✨ AI Smart Add</button>
+      </div>
+
+      <!-- AI Smart Add Box -->
+      <div id="ai-smart-add-section" class="smart-add-box" style="display:none;">
+        <label class="form-label" style="color:var(--accent-teal);">
+          ✨ Type or paste expense description:
+        </label>
+        <textarea id="ai-smart-input" class="smart-add-textarea" placeholder="e.g. Spent 68.50 on grocery shopping at Trader Joe's yesterday, or Received 1200 freelance payment on Friday"></textarea>
+        <button type="button" id="ai-parse-btn" class="btn btn-primary btn-sm" style="width:100%;">
+          <span>✨ Auto-Fill with Gemini AI</span>
+        </button>
+      </div>
+
+      <div class="auth-tabs" style="margin-bottom:20px;">
+        <button id="tx-type-expense-btn" class="auth-tab active" type="button">🔴 Expense</button>
+        <button id="tx-type-income-btn" class="auth-tab" type="button">🟢 Income</button>
+      </div>
+
+      <form id="tx-form">
+        <div class="form-group">
+          <label class="form-label">Amount</label>
+          <div class="input-wrapper">
+            <span class="input-icon">💵</span>
+            <input type="number" id="tx-amount" class="form-control" step="0.01" min="0.01" placeholder="0.00" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Category</label>
+          <select id="tx-category" class="form-control no-icon" required>
+            <!-- Dynamically populated -->
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Description / Note</label>
+          <div class="input-wrapper">
+            <span class="input-icon">📝</span>
+            <input type="text" id="tx-description" class="form-control" placeholder="e.g. Whole Foods Grocery shopping">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Date</label>
+          <div class="input-wrapper">
+            <span class="input-icon">📅</span>
+            <input type="date" id="tx-date" class="form-control" required>
+          </div>
+        </div>
+
+        <button type="submit" id="tx-submit-btn" class="btn btn-primary" style="width:100%; margin-top:10px;">
+          Add Transaction
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: ADD / EDIT BUDGET -->
+  <!-- ========================================================================= -->
+  <div id="budget-modal" class="modal-backdrop">
+    <div class="auth-card" style="max-width:440px;">
+      <button id="budget-modal-close" class="modal-close-btn" title="Close">✕</button>
+
+      <div class="auth-header" style="text-align:left; margin-bottom:20px;">
+        <h2 style="font-size:1.4rem;">Set Monthly Budget</h2>
+        <p>Set a spending limit for an expense category</p>
+      </div>
+
+      <form id="budget-form">
+        <div class="form-group">
+          <label class="form-label">Expense Category</label>
+          <select id="budget-category" class="form-control no-icon" required>
+            <!-- Dynamically populated -->
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Monthly Limit</label>
+          <div class="input-wrapper">
+            <span class="input-icon">🎯</span>
+            <input type="number" id="budget-limit" class="form-control" step="1" min="1" placeholder="e.g. 500" required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:100%; margin-top:10px;">
+          Save Budget Limit
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Application Scripts -->
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/charts.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
