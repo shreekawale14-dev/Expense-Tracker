@@ -1,6 +1,12 @@
-# 💳 Expense Tracker — Full-Stack Personal Finance Management
+# 💳 Expense Tracker — Full-Stack Personal Finance & AI Advisor
 
-A modern, fintech-style personal finance web application to record transactions, organize categories, manage budgets, and gain deep visual insights into your cash flow and spending trends.
+<div align="center">
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/shreekawale14-dev/Expense-Tracker&env=GEMINI_API_KEY,SECRET_KEY)
+&nbsp;&nbsp;
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/shreekawale14-dev/Expense-Tracker)
+
+</div>
 
 ---
 
